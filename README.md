@@ -1,4 +1,4 @@
-Arquitetura orientada a serviços (SOA)
+                                                                                             Arquitetura orientada a serviços (SOA)
 
 Precisaremos considerar alguns aspectos cruciais, desde a separação dos serviços até a integração com o barramento de comunicação que não depende da internet. Vou detalhar um guia passo a passo para implementar essa estrutura em .NET 8.
 
