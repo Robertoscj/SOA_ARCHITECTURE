@@ -35,6 +35,7 @@ Passo 4: Integração com "Mercado Pago"
 Serviço de Pagamento:
 
 Crie um serviço simulado para Mercado Pago que possa realizar a operação de pagamento dentro do ambiente SOA.
+
 Este serviço pode ser utilizado tanto por Contas a Pagar quanto por Contas a Receber, publicando uma mensagem no barramento ao concluir uma transação.
 Interação e Confirmação de Pagamento:
 
