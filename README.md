@@ -113,7 +113,82 @@ Execução e Testes Iniciais:
 
 Execute o projeto ContasAPagarService para verificar se a API está funcionando corretamente.
 
+Execução e Testes Iniciais:
+
+Execute o projeto ContasAPagarService para verificar se a API está funcionando corretamente.
+
 No terminal, execute:
 
 dotnet run --project ContasAPagarService
+Acesse http://localhost:{porta}/api/ContaPagar no navegador para verificar a resposta "Serviço de Contas a Pagar funcionando!".
+
+Configuração do RabbitMQ
+Instalação do RabbitMQ:
+
+Se ainda não tem RabbitMQ instalado, você pode usar Docker para rodá-lo rapidamente.
+
+docker run -d --hostname rabbit --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+Isso irá iniciar RabbitMQ no seu localhost, acessível na porta 15672 para a interface de administração e 5672 para as conexões dos serviços.
+
+Configuração dos Projetos para Conexão com RabbitMQ:
+
+Em cada projeto (ContasAPagarService, ContasAReceberService, PedidosService, EstoqueService), instale o pacote RabbitMQ.Client para integração.
+
+dotnet add package RabbitMQ.Client
+
+Exemplo de Publicação de Mensagem em ContasAPagarService:
+
+Crie um serviço de comunicação que enviará uma mensagem para o RabbitMQ.
+Adicione o código abaixo em um novo arquivo chamado MensagemService.cs na pasta Services do ContasAPagarService.
+
+using RabbitMQ.Client;
+using System.Text;
+
+public class MensagemService
+{
+    private readonly IConnection _connection;
+    private readonly IModel _channel;
+
+    public MensagemService()
+    {
+        var factory = new ConnectionFactory() { HostName = "localhost" };
+        _connection = factory.CreateConnection();
+        _channel = _connection.CreateModel();
+        _channel.QueueDeclare(queue: "contasPagarQueue",
+                             durable: false,
+                             exclusive: false,
+                             autoDelete: false,
+                             arguments: null);
+    }
+
+    public void EnviarMensagem(string mensagem)
+    {
+        var body = Encoding.UTF8.GetBytes(mensagem);
+        _channel.BasicPublish(exchange: "",
+                             routingKey: "contasPagarQueue",
+                             basicProperties: null,
+                             body: body);
+    }
+}
+
+Uso do Serviço de Mensagem no Controller:
+
+No ContaPagarController, inicie e use o MensagemService para enviar uma mensagem ao criar uma nova conta a pagar.
+
+[HttpPost]
+public IActionResult Create(ContaPagar contaPagar)
+{
+    var mensagemService = new MensagemService();
+    mensagemService.EnviarMensagem($"Conta a pagar criada: {contaPagar.Descricao} - {contaPagar.Valor}");
+
+    return Ok("Conta a pagar criada com sucesso!");
+}
+
+Próximos Passos :
+
+ Configurar a Escuta das Mensagens nos Outros Microserviços: Nos próximos passos, vamos configurar os outros serviços (Contas a Receber, Pedidos, Estoque) para escutar as mensagens do RabbitMQ e responder ou processar ações conforme necessário.
+
+ Estrutura Completa do Banco de Dados e APIs: Configurar os bancos de dados independentes para cada serviço e estruturar suas operações CRUD.
+
+ Monitoramento e Logs: Implementar um sistema de logs e monitoramento para acompanhar a comunicação entre os serviços e desempenho geral.
 
