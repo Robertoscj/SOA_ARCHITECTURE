@@ -11,13 +11,16 @@ Configuração do Projeto SOA Principal:
 
 Crie um projeto principal em .NET 8 que será responsável pelo gerenciamento e comunicação entre os serviços.
 Inclua uma camada de Orquestração que gerenciará as interações entre os serviços, utilizando um padrão de barramento de eventos (como um sistema de mensageria que substitua a internet, por exemplo, via RabbitMQ ou Apache Kafka local).
+
 Passo 2: Comunicação e Barramento
+
 Implementação de Comunicação por Mensageria:
 Escolha uma ferramenta de mensageria (como RabbitMQ, NATS ou ActiveMQ) para atuar como o barramento de comunicação.
 Configure os microserviços para publicar e escutar eventos no barramento. Cada operação relevante (como criação de contas a pagar ou atualização de estoque) deve gerar um evento que será transmitido pelo barramento.
 Mensagens de Integração:
 Defina mensagens padronizadas em JSON ou outro formato adequado, que cada microserviço entenderá e processará.
 Cada microserviço deve implementar handlers para as mensagens que ele precisa escutar e processar. Por exemplo, o microserviço de Pedidos pode escutar uma mensagem de Atualização de Estoque.
+
 Passo 3: Estrutura dos Serviços
 Contas a Pagar/Receber:
 
@@ -36,10 +39,12 @@ Este serviço pode ser utilizado tanto por Contas a Pagar quanto por Contas a Re
 Interação e Confirmação de Pagamento:
 
 Ao receber uma solicitação de pagamento, o serviço de Mercado Pago publica uma confirmação no barramento, que Contas a Pagar ou Contas a Receber poderão escutar para confirmar o status do pagamento.
+
 Passo 5: Monitoramento e Logging
 Implementação de Monitoramento:
 Utilize ferramentas como Prometheus e Grafana para monitoramento de performance dos serviços.
 Configure logs estruturados em todos os microserviços, armazenando logs críticos e erros em uma base centralizada para fácil consulta.
+
 Passo 6: Testes e Segurança
 Testes:
 Crie testes unitários e de integração para cada serviço, assegurando que as mensagens estão sendo publicadas e escutadas corretamente no barramento.
@@ -68,14 +73,14 @@ SOA_Project
 Criação da Solução Principal e dos Projetos de Microserviço
 Abra o Visual Studio ou o Visual Studio Code.
 
-Crie uma Solução para agrupar todos os microserviços e o projeto principal de orquestração.
-bash
+Crie uma Solução ( VSCode ou VStudio2022 ) para agrupar todos os microserviços e o projeto principal de orquestração.
+
 dotnet new sln -o SOAProject
 cd SOAProject
 
 Crie cada microserviço como um Projeto de API.
 
-bash
+
 dotnet new webapi -n ContasAPagarService
 dotnet new webapi -n ContasAReceberService
 dotnet new webapi -n PedidosService
@@ -84,7 +89,6 @@ dotnet new webapi -n EstoqueService
 
 Adicione cada projeto à solução.
 
-bash
 dotnet sln add ContasAPagarService/ContasAPagarService.csproj
 dotnet sln add ContasAReceberService/ContasAReceberService.csproj
 dotnet sln add PedidosService/PedidosService.csproj
@@ -110,6 +114,5 @@ Execute o projeto ContasAPagarService para verificar se a API está funcionando 
 
 No terminal, execute:
 
-bash
 dotnet run --project ContasAPagarService
 
