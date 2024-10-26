@@ -8,7 +8,8 @@ using Microsoft.Extensions.Logging;
 
 namespace ContasApagarService.Controller
 {
-    [Route("[controller]")]
+    [ApiController]
+    [Route("api/[controller]")]
     public class ContaPagarControlller : ControllerBase
     {
        [HttpGet]

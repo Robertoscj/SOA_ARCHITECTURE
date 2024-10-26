@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A4EAN+5NsYOQJpeXRZZcMgHLCnpX18yyIJJsvL4T1CDfzWkZI1eQlrYrw+CpHu02C7+7Kip+xhCzSYmghTeB5A==",
+  "dgSpecHash": "zqQ3qW1S2IoxI7KpR7cgESzzJrEue5MevXbcKn563k1rXOfvboIglbDFfC0vFeslMAZhuMQ8uYneo/ne3b0dOA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\npcms\\SOA\\SOAProject\\ContasApagarService\\ContasApagarService.csproj",
+  "projectFilePath": "C:\\Users\\npcms\\SOA\\SOAProject\\ContasAPagarService\\ContasApagarService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\npcms\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.10\\microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",
     "C:\\Users\\npcms\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
