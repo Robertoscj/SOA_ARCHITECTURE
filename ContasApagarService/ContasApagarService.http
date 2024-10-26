@@ -1,0 +1,6 @@
+@ContasApagarService_HostAddress = http://localhost:5250
+
+GET {{ContasApagarService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
