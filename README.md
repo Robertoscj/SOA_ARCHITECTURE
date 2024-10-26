@@ -1,6 +1,6 @@
 Arquitetura orientada a serviços (SOA)
 
-precisará considerar alguns aspectos cruciais, desde a separação dos serviços até a integração com o barramento de comunicação que não depende da internet. Vou detalhar um guia passo a passo para implementar essa estrutura em .NET 8.
+Precisaremos considerar alguns aspectos cruciais, desde a separação dos serviços até a integração com o barramento de comunicação que não depende da internet. Vou detalhar um guia passo a passo para implementar essa estrutura em .NET 8.
 
 Passo 1: Estrutura do Projeto e Serviços
 Criação dos Microserviços:
